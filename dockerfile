@@ -1,5 +1,6 @@
-FROM httpd:2.4
-RUN apt-get update
-COPY ./index.html /usr/local/apache2/htdocs
-EXPOSE 80
-ENTRYPOINT ["/usr/local/apache2/bin/httpd", "-D", "FOREGROUND"]
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y openjdk-11-jdk
+COPY Hello.java /app/
+WORKDIR /app/
+RUN javac Hello.java
+CMD ["java","Hello"]
